@@ -1,20 +1,21 @@
 {
   "schemaVersion": 1,
-  "id": "template",
+  "id": "novusexplodus",
   "version": "${version}",
 
-  "name": "Template",
+  "name": "Novus Explodus",
   "description": "",
   "authors": [
-    "DanyGames2014"
+    "CyborgCabbage"
   ],
 
   "license": "MIT",
-  "icon": "assets/template/icon.png",
+  "icon": "assets/novusexplodus/icon.png",
 
   "environment": "*",
   "entrypoints": {
     "stationapi:event_bus": [
+      "io.github.cyborgcabbage.novusexplodus.events.init.InitListener"
     ],
     "stationapi:event_bus_client": [
     ],
@@ -22,7 +23,7 @@
     ]
   },
   "mixins": [
-    "template.mixins.json"
+    "novusexplodus.mixins.json"
   ],
 
   "depends": {
