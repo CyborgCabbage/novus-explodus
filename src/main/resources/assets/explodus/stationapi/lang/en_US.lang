@@ -1,0 +1,36 @@
+# @ is a shorthand for the current mod id, which is explodus. E.g: tile.@.redclay.name
+tile.@.bombNormal.name=Bomb
+tile.@.bombCompressed.name=Compressed Bomb
+tile.@.bombNuclear.name=Cataclysmic Bomb
+
+tile.@.bombColdNormal.name=Cold Bomb
+tile.@.bombColdCompressed.name=Compressed Cold Bomb
+tile.@.bombColdNuclear.name=Cataclysmic Cold Bomb
+
+tile.@.bombExtinguishingNormal.name=Extinguishing Bomb
+tile.@.bombExtinguishingCompressed.name=Compressed Extinguishing Bomb
+tile.@.bombExtinguishingNuclear.name=Cataclysmic Extinguishing Bomb
+
+tile.@.bombFireNormal.name=Fire Bomb
+tile.@.bombFireCompressed.name=Compressed Fire Bomb
+tile.@.bombFireNuclear.name=Cataclysmic Fire Bomb
+
+tile.@.bombLevellingNormal.name=Levelling Bomb
+tile.@.bombLevellingCompressed.name=Compressed Levelling Bomb
+tile.@.bombLevellingNuclear.name=Cataclysmic Levelling Bomb
+
+tile.@.bombLifeNormal.name=Life Bomb
+tile.@.bombLifeCompressed.name=Compressed Life Bomb
+tile.@.bombLifeNuclear.name=Cataclysmic Life Bomb
+
+tile.@.bombMagneticNormal.name=Magnetic Bomb
+tile.@.bombMagneticCompressed.name=Compressed Magnetic Bomb
+tile.@.bombMagneticNuclear.name=Cataclysmic Magnetic Bomb
+
+tile.@.bombStarNormal.name=Star Bomb
+tile.@.bombStarCompressed.name=Compressed Star Bomb
+tile.@.bombStarNuclear.name=Cataclysmic Star Bomb
+
+item.@.compressedGunpowder.name=Compressed Gunpowder
+item.@.ghastHeart.name=Ghast Heart
+item.@.bedrockShard.name=Bedrock Shard

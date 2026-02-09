@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "gsg",
+    "sss",
+    "gsg"
+  ],
+  "key": {
+    "g": {
+      "item": "minecraft:gunpowder"
+    },
+    "s": {
+      "item": "minecraft:gravel"
+    }
+  },
+  "result": {
+    "item": "explodus:bomb_normal",
+    "count": 1
+  }
+}

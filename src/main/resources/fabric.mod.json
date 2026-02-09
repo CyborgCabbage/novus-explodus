@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "id": "novusexplodus",
+  "id": "explodus",
   "version": "${version}",
 
   "name": "Novus Explodus",
@@ -10,20 +10,23 @@
   ],
 
   "license": "MIT",
-  "icon": "assets/novusexplodus/icon.png",
+  "icon": "assets/explodus/icon.png",
 
   "environment": "*",
   "entrypoints": {
     "stationapi:event_bus": [
-      "io.github.cyborgcabbage.novusexplodus.events.init.InitListener"
+      "io.github.cyborgcabbage.explodus.events.BlockListener",
+      "io.github.cyborgcabbage.explodus.events.EntityListener",
+      "io.github.cyborgcabbage.explodus.events.ItemListener"
     ],
     "stationapi:event_bus_client": [
+      "io.github.cyborgcabbage.explodus.events.EntityRendererListener",
+      "io.github.cyborgcabbage.explodus.events.TextureListener"
     ],
     "stationapi:event_bus_server": [
     ]
   },
   "mixins": [
-    "novusexplodus.mixins.json"
   ],
 
   "depends": {
