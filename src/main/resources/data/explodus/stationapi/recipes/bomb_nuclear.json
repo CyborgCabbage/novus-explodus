@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "gsg",
+    "shs",
+    "gsg"
+  ],
+  "key": {
+    "g": {
+      "item": "explodus:supercompressed_gunpowder"
+    },
+    "h": {
+      "item": "explodus:ghast_heart"
+    },
+    "s": {
+      "item": "minecraft:gravel"
+    }
+  },
+  "result": {
+    "item": "explodus:bomb_nuclear",
+    "count": 1
+  }
+}

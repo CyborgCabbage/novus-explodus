@@ -81,8 +81,13 @@ public class PrimedBombEntity extends Entity implements EntitySpawnDataProvider 
     }
 
     private void explode() {
-        NeoExplosion explosion = ((BombBlock)Block.BLOCKS[blockId]).createExplosion(world, this, this.x, this.y, this.z);
-        explosion.explode();
+        if (Block.BLOCKS[blockId] instanceof BombBlock bombBlock) {
+            NeoExplosion explosion = bombBlock.createExplosion(world, this, this.x, this.y, this.z);
+            explosion.explode();
+        }
+        else {
+            Explodus.LOGGER.error("Could not explode PrimedBombEntity because block ID = {} is not a BombBlock", blockId);
+        }
     }
 
     @Override

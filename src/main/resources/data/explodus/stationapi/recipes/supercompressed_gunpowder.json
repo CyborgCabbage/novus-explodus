@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "explodus:compressed_gunpowder"
+    },
+    {
+      "item": "explodus:compressed_gunpowder"
+    },
+    {
+      "item": "explodus:compressed_gunpowder"
+    },
+    {
+      "item": "explodus:compressed_gunpowder"
+    },
+    {
+      "item": "explodus:bedrock_shard"
+    }
+  ],
+  "result": {
+    "item": "explodus:supercompressed_gunpowder",
+    "count": 1
+  }
+}

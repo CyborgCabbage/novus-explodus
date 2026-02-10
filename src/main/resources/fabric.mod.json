@@ -27,6 +27,7 @@
     ]
   },
   "mixins": [
+    "explodus.mixins.json"
   ],
 
   "depends": {

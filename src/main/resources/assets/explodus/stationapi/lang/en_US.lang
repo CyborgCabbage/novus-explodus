@@ -32,5 +32,6 @@ tile.@.bombStarCompressed.name=Compressed Star Bomb
 tile.@.bombStarNuclear.name=Cataclysmic Star Bomb
 
 item.@.compressedGunpowder.name=Compressed Gunpowder
+item.@.supercompressedGunpowder.name=Supercompressed Gunpowder
 item.@.ghastHeart.name=Ghast Heart
 item.@.bedrockShard.name=Bedrock Shard
