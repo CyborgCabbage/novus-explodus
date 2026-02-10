@@ -10,8 +10,8 @@ import java.util.Arrays;
 import java.util.List;
 
 public class MagneticExplosion extends NeoExplosion{
-    public MagneticExplosion(World world, Entity cause, double x, double y, double z, float power) {
-        super(world, cause, x, y, z, power);
+    public MagneticExplosion(World world, Entity cause, double x, double y, double z, float power, float dropChance) {
+        super(world, cause, x, y, z, power, dropChance);
         this.harmEntities = false;
         this.pushEntities = false;
         this.createParticles = false;

@@ -8,8 +8,8 @@ public class SingleRayExplosion extends NeoExplosion {
     private final float dirY;
     private final float dirZ;
 
-    public SingleRayExplosion(World world, Entity cause, double x, double y, double z, float power, float dirX, float dirY, float dirZ) {
-        super(world, cause, x, y, z, power);
+    public SingleRayExplosion(World world, Entity cause, double x, double y, double z, float power, float dropChance, float dirX, float dirY, float dirZ) {
+        super(world, cause, x, y, z, power, dropChance);
         this.dirX = dirX;
         this.dirY = dirY;
         this.dirZ = dirZ;

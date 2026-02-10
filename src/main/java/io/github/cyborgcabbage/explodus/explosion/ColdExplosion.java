@@ -8,8 +8,8 @@ import net.minecraft.world.World;
 import java.util.ArrayList;
 
 public class ColdExplosion extends NeoExplosion{
-    public ColdExplosion(World world, Entity cause, double x, double y, double z, float power) {
-        super(world, cause, x, y, z, power);
+    public ColdExplosion(World world, Entity cause, double x, double y, double z, float power, float dropChance) {
+        super(world, cause, x, y, z, power, dropChance);
         this.harmEntities = false;
     }
 

@@ -14,8 +14,8 @@ import java.util.List;
 
 public class LifeExplosion extends NeoExplosion{
 
-    public LifeExplosion(World world, Entity cause, double x, double y, double z, float power) {
-        super(world, cause, x, y, z, power);
+    public LifeExplosion(World world, Entity cause, double x, double y, double z, float power, float dropChance) {
+        super(world, cause, x, y, z, power, dropChance);
         this.harmEntities = false;
     }
 

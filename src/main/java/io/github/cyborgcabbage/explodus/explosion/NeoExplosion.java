@@ -19,9 +19,9 @@ public class NeoExplosion {
     public double z;
     public Entity cause;
     public float power;
+    protected float dropChance;
     public HashSet<BlockPos> damagedBlocks = new HashSet<>();
 
-    protected float dropChance = 0.3f;
     protected boolean destroyBlocks = true;
     protected boolean harmEntities = true;
     protected boolean pushEntities = true;
@@ -32,13 +32,14 @@ public class NeoExplosion {
     protected float rayRandomisation = 0.3f;
     protected int replacementBlockId = 0;
     
-    public NeoExplosion(World world, Entity cause, double x, double y, double z, float power) {
+    public NeoExplosion(World world, Entity cause, double x, double y, double z, float power, float dropChance) {
         this.world = world;
         this.cause = cause;
         this.power = power;
         this.x = x;
         this.y = y;
         this.z = z;
+        this.dropChance = dropChance;
     }
 
     public void explode(){

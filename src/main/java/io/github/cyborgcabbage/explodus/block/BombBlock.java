@@ -18,16 +18,19 @@ public class BombBlock extends TemplateBlock {
     private final ExplosionFactory explosionFactory;
     private final float power;
     private final int fuseMultiplier;
+    private final float dropChance;
 
-    public BombBlock(Identifier identifier, ExplosionFactory explosionFactory, float power, int fuseMultiplier) {
+    public BombBlock(Identifier identifier, ExplosionFactory explosionFactory, float power, int fuseMultiplier, float dropChance) {
         super(identifier, Material.TNT);
         this.explosionFactory = explosionFactory;
+
         this.power = power;
         this.fuseMultiplier = fuseMultiplier;
+        this.dropChance = dropChance;
     }
 
     public NeoExplosion createExplosion(World world, Entity cause, double x, double y, double z) {
-        return explosionFactory.create(world, cause, x, y, z, power);
+        return explosionFactory.create(world, cause, x, y, z, power, dropChance);
     }
 
     @Override
