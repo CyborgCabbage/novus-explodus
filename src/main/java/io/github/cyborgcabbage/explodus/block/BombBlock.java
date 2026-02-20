@@ -2,6 +2,7 @@ package io.github.cyborgcabbage.explodus.block;
 
 import io.github.cyborgcabbage.explodus.entity.PrimedBombEntity;
 import io.github.cyborgcabbage.explodus.explosion.ExplosionFactory;
+import io.github.cyborgcabbage.explodus.explosion.ExplosionParameters;
 import io.github.cyborgcabbage.explodus.explosion.NeoExplosion;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -16,21 +17,18 @@ import net.modificationstation.stationapi.api.util.Namespace;
 
 public class BombBlock extends TemplateBlock {
     private final ExplosionFactory explosionFactory;
-    private final float power;
-    private final int fuseMultiplier;
-    private final float dropChance;
+    private final ExplosionParameters parameters;
 
-    public BombBlock(Identifier identifier, ExplosionFactory explosionFactory, float power, int fuseMultiplier, float dropChance) {
+    public BombBlock(Identifier identifier, ExplosionFactory explosionFactory, ExplosionParameters parameters) {
         super(identifier, Material.TNT);
         this.explosionFactory = explosionFactory;
-
-        this.power = power;
-        this.fuseMultiplier = fuseMultiplier;
-        this.dropChance = dropChance;
+        this.parameters = parameters;
+        this.setHardness(0.0F);
+        this.setSoundGroup(Block.DIRT_SOUND_GROUP);
     }
 
     public NeoExplosion createExplosion(World world, Entity cause, double x, double y, double z) {
-        return explosionFactory.create(world, cause, x, y, z, power, dropChance);
+        return explosionFactory.create(world, cause, x, y, z, parameters);
     }
 
     @Override
@@ -57,7 +55,7 @@ public class BombBlock extends TemplateBlock {
         if (shortFuse) {
             entity.fuse = world.random.nextInt(entity.fuse / 4) + entity.fuse / 8;
         }
-        entity.fuse *= fuseMultiplier;
+        entity.fuse *= this.parameters.fuseMultiplier();
         world.spawnEntity(entity);
     }
 

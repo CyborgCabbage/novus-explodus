@@ -44,8 +44,8 @@ public class LifeExplosion extends NeoExplosion{
                 new LargeOakTreeFeature()
         );
     }
-    public LifeExplosion(World world, Entity cause, double x, double y, double z, float power, float dropChance) {
-        super(world, cause, x, y, z, power, dropChance);
+    public LifeExplosion(World world, Entity cause, double x, double y, double z, ExplosionParameters parameters) {
+        super(world, cause, x, y, z, parameters);
         this.harmEntities = false;
         this.stopAfterOneBlock = true;
     }

@@ -18,10 +18,6 @@ public class TextureListener {
     public static int bombColdNormalSide;
     public static int bombColdNuclearSide;
 
-    public static int bombExtinguishingCompressedSide;
-    public static int bombExtinguishingNormalSide;
-    public static int bombExtinguishingNuclearSide;
-
     public static int bombFireCompressedSide;
     public static int bombFireNormalSide;
     public static int bombFireNuclearSide;
@@ -37,16 +33,6 @@ public class TextureListener {
     public static int bombLifeNormalTop;
     public static int bombLifeNuclearSide;
     public static int bombLifeNuclearTop;
-
-    public static int bombMagneticCompressedBottom;
-    public static int bombMagneticCompressedSide;
-    public static int bombMagneticCompressedTop;
-    public static int bombMagneticNormalBottom;
-    public static int bombMagneticNormalSide;
-    public static int bombMagneticNormalTop;
-    public static int bombMagneticNuclearBottom;
-    public static int bombMagneticNuclearSide;
-    public static int bombMagneticNuclearTop;
 
     public static int bombStarCompressedSide;
     public static int bombStarNormalSide;
@@ -71,10 +57,6 @@ public class TextureListener {
         bombColdNormalSide = atlas.addTexture(NAMESPACE.id("block/bomb/cold/normal_side")).index;
         bombColdNuclearSide = atlas.addTexture(NAMESPACE.id("block/bomb/cold/nuclear_side")).index;
 
-        bombExtinguishingCompressedSide = atlas.addTexture(NAMESPACE.id("block/bomb/extinguishing/compressed_side")).index;
-        bombExtinguishingNormalSide = atlas.addTexture(NAMESPACE.id("block/bomb/extinguishing/normal_side")).index;
-        bombExtinguishingNuclearSide = atlas.addTexture(NAMESPACE.id("block/bomb/extinguishing/nuclear_side")).index;
-
         bombFireCompressedSide = atlas.addTexture(NAMESPACE.id("block/bomb/fire/compressed_side")).index;
         bombFireNormalSide = atlas.addTexture(NAMESPACE.id("block/bomb/fire/normal_side")).index;
         bombFireNuclearSide = atlas.addTexture(NAMESPACE.id("block/bomb/fire/nuclear_side")).index;
@@ -90,16 +72,6 @@ public class TextureListener {
         bombLifeNormalTop = atlas.addTexture(NAMESPACE.id("block/bomb/life/normal_top")).index;
         bombLifeNuclearSide = atlas.addTexture(NAMESPACE.id("block/bomb/life/nuclear_side")).index;
         bombLifeNuclearTop = atlas.addTexture(NAMESPACE.id("block/bomb/life/nuclear_top")).index;
-
-        bombMagneticCompressedBottom = atlas.addTexture(NAMESPACE.id("block/bomb/magnetic/compressed_bottom")).index;
-        bombMagneticCompressedSide = atlas.addTexture(NAMESPACE.id("block/bomb/magnetic/compressed_side")).index;
-        bombMagneticCompressedTop = atlas.addTexture(NAMESPACE.id("block/bomb/magnetic/compressed_top")).index;
-        bombMagneticNormalBottom = atlas.addTexture(NAMESPACE.id("block/bomb/magnetic/normal_bottom")).index;
-        bombMagneticNormalSide = atlas.addTexture(NAMESPACE.id("block/bomb/magnetic/normal_side")).index;
-        bombMagneticNormalTop = atlas.addTexture(NAMESPACE.id("block/bomb/magnetic/normal_top")).index;
-        bombMagneticNuclearBottom = atlas.addTexture(NAMESPACE.id("block/bomb/magnetic/nuclear_bottom")).index;
-        bombMagneticNuclearSide = atlas.addTexture(NAMESPACE.id("block/bomb/magnetic/nuclear_side")).index;
-        bombMagneticNuclearTop = atlas.addTexture(NAMESPACE.id("block/bomb/magnetic/nuclear_top")).index;
 
         bombStarCompressedSide = atlas.addTexture(NAMESPACE.id("block/bomb/star/compressed_side")).index;
         bombStarNormalSide = atlas.addTexture(NAMESPACE.id("block/bomb/star/normal_side")).index;
@@ -123,10 +95,6 @@ public class TextureListener {
         BlockListener.bombColdCompressed.setTextureIds(bombCompressedBottom, bombColdCompressedSide, bombCompressedTop);
         BlockListener.bombColdNuclear.setTextureIds(bombNuclearBottom, bombColdNuclearSide, bombNuclearTop);
 
-        BlockListener.bombExtinguishingNormal.setTextureIds(bombNormalBottom, bombExtinguishingNormalSide, bombNormalTop);
-        BlockListener.bombExtinguishingCompressed.setTextureIds(bombCompressedBottom, bombExtinguishingCompressedSide, bombCompressedTop);
-        BlockListener.bombExtinguishingNuclear.setTextureIds(bombNuclearBottom, bombExtinguishingNuclearSide, bombNuclearTop);
-
         BlockListener.bombFireNormal.setTextureIds(bombNormalBottom, bombFireNormalSide, bombNormalTop);
         BlockListener.bombFireCompressed.setTextureIds(bombCompressedBottom, bombFireCompressedSide, bombCompressedTop);
         BlockListener.bombFireNuclear.setTextureIds(bombNuclearBottom, bombFireNuclearSide, bombNuclearTop);
@@ -138,10 +106,6 @@ public class TextureListener {
         BlockListener.bombLifeNormal.setTextureIds(bombLifeBottom, bombLifeNormalSide, bombLifeNormalTop);
         BlockListener.bombLifeCompressed.setTextureIds(bombLifeBottom, bombLifeCompressedSide, bombLifeCompressedTop);
         BlockListener.bombLifeNuclear.setTextureIds(bombLifeBottom, bombLifeNuclearSide, bombLifeNuclearTop);
-
-        BlockListener.bombMagneticNormal.setTextureIds(bombMagneticNormalBottom, bombMagneticNormalSide, bombMagneticNormalTop);
-        BlockListener.bombMagneticCompressed.setTextureIds(bombMagneticCompressedBottom, bombMagneticCompressedSide, bombMagneticCompressedTop);
-        BlockListener.bombMagneticNuclear.setTextureIds(bombMagneticNuclearBottom, bombMagneticNuclearSide, bombMagneticNuclearTop);
 
         BlockListener.bombStarNormal.setTextureIds(bombNormalBottom, bombStarNormalSide, bombNormalTop);
         BlockListener.bombStarCompressed.setTextureIds(bombCompressedBottom, bombStarCompressedSide, bombCompressedTop);

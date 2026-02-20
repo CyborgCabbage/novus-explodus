@@ -26,8 +26,8 @@ public class StarExplosion extends NeoExplosion {
         }
     }
 
-    public StarExplosion(World world, Entity cause, double x, double y, double z, float power, float dropChance) {
-        super(world, cause, x, y, z, power, dropChance);
+    public StarExplosion(World world, Entity cause, double x, double y, double z, ExplosionParameters parameters) {
+        super(world, cause, x, y, z, parameters);
         this.replacementBlockId = Block.GLOWSTONE.id;
         this.dropChance = 0.0f;
         this.harmEntities = false;

@@ -1,16 +1,21 @@
 package io.github.cyborgcabbage.explodus.explosion;
 
+import io.github.cyborgcabbage.explodus.events.ItemListener;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.ItemEntity;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import net.modificationstation.stationapi.api.util.math.Vec3d;
 
 import java.util.*;
 
 public class NeoExplosion {
+    private static float BEDROCK_SHARD_POWER = 10.0f;
+    private static int BEDROCK_SHARD_MAX = 8;
     protected final Random random = new Random();
     protected final World world;
     public double x;
@@ -20,6 +25,7 @@ public class NeoExplosion {
     public float power;
     protected float dropChance;
     public HashSet<BlockPos> damagedBlocks = new HashSet<>();
+    public HashSet<BlockPos> bedrockBlocks = new HashSet<>();
 
     protected boolean destroyBlocks = true;
     protected boolean stopAfterOneBlock = false;
@@ -27,29 +33,34 @@ public class NeoExplosion {
     protected boolean pushEntities = true;
     protected float fireChance = 0.0f;
 
-    protected boolean createParticles = true;
+    protected float particleChance;
+    protected int maxBedrockShards;
     protected boolean createSound = true;
     protected float rayRandomisation = 0.3f;
     protected int replacementBlockId = 0;
     
-    public NeoExplosion(World world, Entity cause, double x, double y, double z, float power, float dropChance) {
+    public NeoExplosion(World world, Entity cause, double x, double y, double z, ExplosionParameters parameters) {
         this.world = world;
         this.cause = cause;
-        this.power = power;
         this.x = x;
         this.y = y;
         this.z = z;
-        this.dropChance = dropChance;
+        this.power = parameters.power();
+        this.dropChance = parameters.dropChance();
+        this.particleChance = parameters.particleChance();
+        this.maxBedrockShards = parameters.maxBedrockShards();
     }
 
     public void explode(){
         damagedBlocks.clear();
+        bedrockBlocks.clear();
         if (fireChance > 0.0 || destroyBlocks) this.updateDamagedBlocks();
         if (!harmEntities || !pushEntities) this.effectEntities();
         if (destroyBlocks) this.destroyBlocks();
         if (fireChance > 0.0) this.createFires();
-        if (createParticles) this.createParticles();
+        if (particleChance > 0.0) this.createParticles();
         if (createSound) this.createSound();
+        if (maxBedrockShards > 0) this.spawnBedrockShards();
     }
 
     protected void processRay(double dirX, double dirY, double dirZ, float multiplier) {
@@ -65,6 +76,10 @@ public class NeoExplosion {
             int blockY = MathHelper.floor(rayY);
             int blockZ = MathHelper.floor(rayZ);
             int blockId = this.world.getBlockId(blockX, blockY, blockZ);
+            if (blockId == Block.BEDROCK.id) {
+                bedrockBlocks.add(new BlockPos(blockX, blockY, blockZ));
+                break;
+            }
             rayPower -= getBlastResistance(blockId) * stepSize;
             if (rayPower > 0.0F) {
                 damagedBlocks.add(new BlockPos(blockX, blockY, blockZ));
@@ -97,7 +112,7 @@ public class NeoExplosion {
         int min_z = MathHelper.floor(this.z - damagingRange - 1.0D);
         int max_z = MathHelper.floor(this.z + damagingRange + 1.0D);
         List inBounds = this.world.getEntities(this.cause, Box.create(min_x,  min_y,  min_z,  max_x,  max_y,  max_z));
-        Vec3d explosionOrigin = Vec3d.create(this.x, this.y, this.z);
+        var explosionOrigin = net.minecraft.util.math.Vec3d.create(this.x, this.y, this.z);
 
         for (Object inBound : inBounds) {
             Entity entity = (Entity) inBound;
@@ -143,27 +158,26 @@ public class NeoExplosion {
     }
 
     public void createParticles() {
-        ArrayList<BlockPos> blocks = new ArrayList<>(this.damagedBlocks);
-
-        for (int block_index = blocks.size() - 1; block_index >= 0; --block_index) {
-            BlockPos BlockPos = blocks.get(block_index);
-            double particle_x = (float) BlockPos.x + this.world.random.nextFloat();
-            double particle_y = (float) BlockPos.y + this.world.random.nextFloat();
-            double particle_z = (float) BlockPos.z + this.world.random.nextFloat();
-            double vec_x = particle_x - this.x;
-            double vec_y = particle_y - this.y;
-            double vec_z = particle_z - this.z;
-            double distance = MathHelper.sqrt(vec_x * vec_x + vec_y * vec_y + vec_z * vec_z);
-            vec_x /= distance;
-            vec_y /= distance;
-            vec_z /= distance;
-            double inverse_distance = 0.5D / (distance / (double) this.power + 0.1D); //is 5 at the centre, decays as you move away
-            inverse_distance *= this.world.random.nextFloat() * this.world.random.nextFloat() + 0.3F;
-            vec_x *= inverse_distance;
-            vec_y *= inverse_distance;
-            vec_z *= inverse_distance;
-            this.world.addParticle("explode", (particle_x + this.x) / 2.0D, (particle_y + this.y) / 2.0D, (particle_z + this.z) / 2.0D, vec_x, vec_y, vec_z);
-            this.world.addParticle("smoke", particle_x, particle_y, particle_z, vec_x, vec_y, vec_z);
+        for (BlockPos blockPos : this.damagedBlocks) {
+            if (this.world.random.nextFloat() < this.particleChance) {
+                double particleX = (float) blockPos.x + this.world.random.nextFloat();
+                double particleY = (float) blockPos.y + this.world.random.nextFloat();
+                double particleZ = (float) blockPos.z + this.world.random.nextFloat();
+                double vecX = particleX - this.x;
+                double vecY = particleY - this.y;
+                double vecZ = particleZ - this.z;
+                double distance = MathHelper.sqrt(vecX * vecX + vecY * vecY + vecZ * vecZ);
+                vecX /= distance;
+                vecY /= distance;
+                vecZ /= distance;
+                double inverse_distance = 0.5D / (distance / (double) this.power + 0.1D); //is 5 at the centre, decays as you move away
+                inverse_distance *= this.world.random.nextFloat() * this.world.random.nextFloat() + 0.3F;
+                vecX *= inverse_distance;
+                vecY *= inverse_distance;
+                vecZ *= inverse_distance;
+                this.world.addParticle("explode", (particleX + this.x) / 2.0D, (particleY + this.y) / 2.0D, (particleZ + this.z) / 2.0D, vecX, vecY, vecZ);
+                this.world.addParticle("smoke", particleX, particleY, particleZ, vecX, vecY, vecZ);
+            }
         }
     }
 
@@ -203,6 +217,25 @@ public class NeoExplosion {
             double z = Math.sin(theta) * radius;
 
             processRay(x, y, z, 1.0f);
+        }
+    }
+
+    private void spawnBedrockShards() {
+        // Get spawn points from bedrock with air above or below (nether roof) it
+        List<Vec3d> spawnPoints = new ArrayList<>();
+        for (BlockPos blockPos : bedrockBlocks) {
+            if (this.world.getBlockId(blockPos.x, blockPos.y + 1, blockPos.z) == 0) {
+                spawnPoints.add(new Vec3d(blockPos.x + 0.5f, blockPos.y + 1.2f, blockPos.z + 0.5f));
+            }else if (this.world.getBlockId(blockPos.x, blockPos.y - 1, blockPos.z) == 0) {
+                spawnPoints.add(new Vec3d(blockPos.x + 0.5f, blockPos.y - 0.2f, blockPos.z + 0.5f));
+            }
+        }
+        int shardCount = Math.min(spawnPoints.size() / 2, this.maxBedrockShards);
+        for (int i = 0; i < shardCount; i++) {
+            Vec3d point = spawnPoints.get(this.world.random.nextInt(spawnPoints.size()));
+            ItemEntity entity = new ItemEntity(this.world, point.x, point.y, point.z, new ItemStack(ItemListener.bedrockShard, 1));
+            entity.pickupDelay = 10;
+            this.world.spawnEntity(entity);
         }
     }
 }
