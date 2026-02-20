@@ -74,8 +74,8 @@ public class BlockListener {
         bombMagneticCompressed = new BombBlock(NAMESPACE.id("bomb_magnetic_compressed"), MagneticExplosion::new, 16.0f, 2, 0.1f).setTranslationKey(NAMESPACE, "bombMagneticCompressed");
         bombMagneticNuclear = new BombBlock(NAMESPACE.id("bomb_magnetic_nuclear"), MagneticExplosion::new, 64.0f, 4, 0.03f).setTranslationKey(NAMESPACE, "bombMagneticNuclear");
 
-        bombStarNormal = new BombBlock(NAMESPACE.id("bomb_star_normal"), StarExplosion::new, 5.0f, 1, 0.3f).setTranslationKey(NAMESPACE, "bombStarNormal");
+        bombStarNormal = new BombBlock(NAMESPACE.id("bomb_star_normal"), StarExplosion::new, 6.0f, 1, 0.3f).setTranslationKey(NAMESPACE, "bombStarNormal");
         bombStarCompressed = new BombBlock(NAMESPACE.id("bomb_star_compressed"), StarExplosion::new, 16.0f, 2, 0.1f).setTranslationKey(NAMESPACE, "bombStarCompressed");
-        bombStarNuclear = new BombBlock(NAMESPACE.id("bomb_star_nuclear"), StarExplosion::new, 64.0f, 4, 0.03f).setTranslationKey(NAMESPACE, "bombStarNuclear");
+        bombStarNuclear = new BombBlock(NAMESPACE.id("bomb_star_nuclear"), StarExplosion::new, 44.0f, 4, 0.03f).setTranslationKey(NAMESPACE, "bombStarNuclear");
     }
 }

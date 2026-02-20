@@ -7,7 +7,6 @@ import net.minecraft.util.math.Box;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-import net.modificationstation.stationapi.api.block.BlockState;
 
 import java.util.*;
 
@@ -23,6 +22,7 @@ public class NeoExplosion {
     public HashSet<BlockPos> damagedBlocks = new HashSet<>();
 
     protected boolean destroyBlocks = true;
+    protected boolean stopAfterOneBlock = false;
     protected boolean harmEntities = true;
     protected boolean pushEntities = true;
     protected float fireChance = 0.0f;
@@ -66,9 +66,11 @@ public class NeoExplosion {
             int blockZ = MathHelper.floor(rayZ);
             int blockId = this.world.getBlockId(blockX, blockY, blockZ);
             rayPower -= getBlastResistance(blockId) * stepSize;
-
             if (rayPower > 0.0F) {
                 damagedBlocks.add(new BlockPos(blockX, blockY, blockZ));
+                if (stopAfterOneBlock && blockId > 0) {
+                    break;
+                }
             }
 
             rayX += dirX * stepSize;
@@ -81,7 +83,7 @@ public class NeoExplosion {
 
     protected float getBlastResistance(int blockId) {
         if (blockId > 0) {
-            return Block.BLOCKS[blockId].getBlastResistance(this.cause) + 0.3F;
+            return Block.BLOCKS[blockId].getBlastResistance(this.cause);
         }
         return 0.0f;
     }

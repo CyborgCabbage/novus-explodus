@@ -8,5 +8,6 @@ public class FireExplosion extends NeoExplosion {
         super(world, cause, x, y, z, power, dropChance);
         this.fireChance = 0.8f;
         this.destroyBlocks = false;
+        this.stopAfterOneBlock = true;
     }
 }

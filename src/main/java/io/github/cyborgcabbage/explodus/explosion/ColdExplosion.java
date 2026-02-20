@@ -14,19 +14,29 @@ public class ColdExplosion extends NeoExplosion{
     }
 
     @Override
+    protected float getBlastResistance(int blockId) {
+        // Penetrate water as if it were dirt
+        if (blockId == Block.WATER.id || blockId == Block.FLOWING_WATER.id) {
+            return super.getBlastResistance(Block.DIRT.id);
+        }
+        return super.getBlastResistance(blockId);
+    }
+
+    @Override
     public void destroyBlocks() {
-        ArrayList<BlockPos> blocks = new ArrayList<>(this.damagedBlocks);
-        for(int block_index = blocks.size() - 1; block_index >= 0; --block_index) {
-            BlockPos BlockPos = blocks.get(block_index);
-            int blockId = this.world.getBlockId(BlockPos.x, BlockPos.y, BlockPos.z);
-            int belowBlockId = this.world.getBlockId(BlockPos.x, BlockPos.y-1, BlockPos.z);
-            if (blockId == 0 && belowBlockId > 0) {
-                if (belowBlockId == Block.WATER.id || belowBlockId == Block.FLOWING_WATER.id) {
-                    this.world.setBlock(BlockPos.x, BlockPos.y-1, BlockPos.z, Block.ICE.id);
-                    this.world.setBlock(BlockPos.x, BlockPos.y, BlockPos.z, Block.SNOW.id);
-                }else if(Block.BLOCKS[belowBlockId].isFullCube()){
-                    this.world.setBlock(BlockPos.x, BlockPos.y, BlockPos.z, Block.SNOW.id);
-                }
+        for(BlockPos blockPos : this.damagedBlocks) {
+            int blockId = this.world.getBlockId(blockPos.x, blockPos.y, blockPos.z);
+            if (blockId == 0) {
+                continue;
+            }
+            int aboveBlockId = this.world.getBlockId(blockPos.x, blockPos.y+1, blockPos.z);
+            boolean isWater = (blockId == Block.WATER.id || blockId == Block.FLOWING_WATER.id);
+            boolean isWaterAbove = (aboveBlockId == Block.WATER.id || aboveBlockId == Block.FLOWING_WATER.id || aboveBlockId == Block.ICE.id);
+            if (isWater && !isWaterAbove) {
+                this.world.setBlock(blockPos.x, blockPos.y, blockPos.z, Block.ICE.id);
+            }
+            if (aboveBlockId == 0 && Block.SNOW.canPlaceAt(this.world, blockPos.x, blockPos.y+1, blockPos.z)) {
+                this.world.setBlock(blockPos.x, blockPos.y+1, blockPos.z, Block.SNOW.id);
             }
         }
     }

@@ -47,6 +47,7 @@ public class LifeExplosion extends NeoExplosion{
     public LifeExplosion(World world, Entity cause, double x, double y, double z, float power, float dropChance) {
         super(world, cause, x, y, z, power, dropChance);
         this.harmEntities = false;
+        this.stopAfterOneBlock = true;
     }
 
     @Override
@@ -94,6 +95,7 @@ public class LifeExplosion extends NeoExplosion{
             // Grow Shrubs
             if (this.random.nextInt(6) == 0) {
                 int undergrowthId = undergrowthBlocks.get(this.random.nextInt(undergrowthBlocks.size()));
+                // Tall grass needs a meta of 1, otherwise it will look like a dead bush
                 this.world.setBlock(BlockPos.x, BlockPos.y + 1, BlockPos.z, undergrowthId, undergrowthId == Block.GRASS.id ? 1 : 0);
             }
         }

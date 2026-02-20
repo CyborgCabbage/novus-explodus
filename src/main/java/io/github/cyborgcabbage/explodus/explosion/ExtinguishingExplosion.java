@@ -10,6 +10,7 @@ import java.util.ArrayList;
 public class ExtinguishingExplosion extends NeoExplosion {
     public ExtinguishingExplosion(World world, Entity cause, double x, double y, double z, float power, float dropChance) {
         super(world, cause, x, y, z, power, dropChance);
+        this.stopAfterOneBlock = true;
     }
 
     @Override
